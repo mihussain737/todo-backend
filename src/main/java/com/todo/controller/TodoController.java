@@ -30,7 +30,7 @@ public class TodoController {
     }
 
     // Build Get Todo REST API
-    @PreAuthorize("hasAnyRole('ADMIN',('USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("{id}")
     public ResponseEntity<TodoDto> getTodo(@PathVariable("id") Long todoId){
         TodoDto todoDto = todoService.getTodo(todoId);
@@ -39,7 +39,7 @@ public class TodoController {
 
     // Build Get All Todos REST API
     @GetMapping
-    @PreAuthorize("hasAnyRole = ('ADMIN', 'USER')")
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     public ResponseEntity<List<TodoDto>> getAllTodos(){
         List<TodoDto> todos = todoService.getAllTodos();
         //return new ResponseEntity<>(todos, HttpStatus.OK);
