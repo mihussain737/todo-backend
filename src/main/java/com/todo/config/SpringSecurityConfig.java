@@ -34,6 +34,8 @@ public class SpringSecurityConfig {
 //                    requests.requestMatchers(HttpMethod.PUT,"api/**").hasRole("ADMIN");
 //                    requests.requestMatchers(HttpMethod.PATCH,"api/**").hasRole("USER");
 //                    requests.requestMatchers(HttpMethod.GET,"api/**").hasAnyRole("USER","ADMIN");
+                    requests.requestMatchers("/api/auth/**").permitAll();
+
                     requests.anyRequest().authenticated();
                 }).httpBasic(Customizer.withDefaults());
         return http.build();
