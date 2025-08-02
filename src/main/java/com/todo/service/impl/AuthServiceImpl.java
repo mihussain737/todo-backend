@@ -1,4 +1,5 @@
 package com.todo.service.impl;
+
 import com.todo.dto.LoginDto;
 import com.todo.dto.RegisterDto;
 import com.todo.entity.Role;
@@ -32,13 +33,14 @@ public class AuthServiceImpl implements AuthService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthenticationManager authenticationManager;
+
     @Override
     public String register(RegisterDto registerDto) {
-        if(userRepository.existsByUsername(registerDto.getUsername())) {
-            throw new TodoAPIException(HttpStatus.BAD_REQUEST,"Username is already exists");
+        if (userRepository.existsByUsername(registerDto.getUsername())) {
+            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "Username is already exists");
         }
-        if(userRepository.existsByEmail(registerDto.getEmail())) {
-            throw new TodoAPIException(HttpStatus.BAD_REQUEST,"Email is already exists");
+        if (userRepository.existsByEmail(registerDto.getEmail())) {
+            throw new TodoAPIException(HttpStatus.BAD_REQUEST, "Email is already exists");
         }
         User user = new User();
         user.setName(registerDto.getName());
@@ -55,7 +57,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String login(LoginDto loginDto) {
-        Authentication authentication= authenticationManager.authenticate(
+        Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(),
                         loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
